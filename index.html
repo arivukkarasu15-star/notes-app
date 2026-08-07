@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Notes</title>
+  <title>Notebook</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -10,14 +11,20 @@
   <div class="app">
 
     <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">N</div>
+        <div>
+          <h1>Notebook</h1>
+        </div>
+      </div>
       <div class="sidebar-top">
         <div class="search">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
           </svg>
-          <input type="text" id="searchInput" placeholder="Search notes">
+          <input type="search" id="searchInput" placeholder="Search notes" aria-label="Search notes">
         </div>
-        <button id="themeBtn" title="Toggle theme">
+        <button id="themeBtn" title="Toggle theme" aria-label="Toggle theme">
           <svg id="themeIcon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="5"/>
             <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/>
@@ -25,7 +32,19 @@
         </button>
       </div>
 
+      <div class="list-heading">
+        <span>All notes</span>
+        <div class="list-tools">
+          <span id="noteCount" class="note-count">0</span>
+          <button id="selectBtn" class="select-btn" type="button">Select</button>
+        </div>
+      </div>
       <ul id="noteList" class="note-list"></ul>
+      <p id="noResults" class="no-results" hidden>No notes match your search.</p>
+      <div id="bulkActions" class="bulk-actions" hidden>
+        <span id="selectedCount">0 selected</span>
+        <button id="deleteSelectedBtn" type="button">Delete selected</button>
+      </div>
 
       <button id="newBtn" class="new-btn">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -35,19 +54,27 @@
       </button>
     </aside>
 
+    <div id="sidebarResizer" class="sidebar-resizer" role="separator" aria-orientation="vertical" aria-label="Resize notes sidebar"></div>
+
     <main class="editor" id="editor">
       <div class="empty-state" id="emptyState">
+        <div class="empty-illustration" aria-hidden="true">
+          <svg viewBox="0 0 80 80" fill="none"><path d="M22 13h29l9 9v44a4 4 0 0 1-4 4H22a4 4 0 0 1-4-4V17a4 4 0 0 1 4-4Z" fill="currentColor" opacity=".14"/><path d="M51 13v10h10M29 37h22M29 47h22M29 57h14" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
         <button id="emptyNewBtn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
           </svg>
-          Create a note
+          New note
         </button>
       </div>
 
       <div class="editor-content" id="editorContent">
         <div class="editor-bar">
-          <span id="timestamp" class="timestamp"></span>
+          <div>
+            <p class="eyebrow">Current note</p>
+            <span id="timestamp" class="timestamp"></span>
+          </div>
           <div class="editor-actions">
             <button id="saveBtn" title="Save note">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -65,8 +92,9 @@
             </button>
           </div>
         </div>
-        <input type="text" id="titleInput" placeholder="Untitled" autocomplete="off">
-        <textarea id="bodyInput" placeholder="Write something..."></textarea>
+        <input type="text" id="titleInput" placeholder="Untitled note" autocomplete="off" aria-label="Note title">
+        <div class="writing-rule"></div>
+        <textarea id="bodyInput" placeholder="Start writing…" aria-label="Note body"></textarea>
       </div>
     </main>
 
