@@ -111,11 +111,13 @@ function selectNote(id) {
   timestamp.textContent = "Edited " + relativeTime(note.updatedAt);
   emptyState.hidden = true;
   editorContent.classList.add("visible");
+  document.body.classList.add("note-open");
   renderNotes();
 }
 
 function closeEditor() {
   activeId = null;
+  document.body.classList.remove("note-open");
   emptyState.hidden = false;
   editorContent.classList.remove("visible");
   renderNotes();
@@ -132,6 +134,7 @@ function createNote() {
 
 document.getElementById("newBtn").onclick = createNote;
 document.getElementById("emptyNewBtn").onclick = createNote;
+document.getElementById("backBtn").onclick = closeEditor;
 
 document.getElementById("deleteBtn").onclick = () => {
   notes = notes.filter(n => n.id !== activeId);

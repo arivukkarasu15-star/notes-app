@@ -1,6 +1,6 @@
 # Notes App
 
-A lightweight desktop notes app built with HTML, CSS, and JavaScript for the interface, running inside a native window via Python (pywebview) instead of a browser tab.
+A lightweight notes app built with HTML, CSS, and JavaScript. It runs as a website on Netlify and can also be opened in a native desktop window using Python (pywebview).
 
 ## Features
 
@@ -17,6 +17,24 @@ A lightweight desktop notes app built with HTML, CSS, and JavaScript for the int
 - **Storage:** browser localStorage inside the webview
 
 ## Running it
+
+### Run as a website locally
+
+This is a static site and does not need a build step. From the project folder, start any static file server, for example:
+
+```
+python -m http.server 8000
+```
+
+Then open `http://localhost:8000` in a browser.
+
+### Deploy to Netlify
+
+The included `netlify.toml` publishes the project folder directly; no build command or environment variables are needed. In Netlify, choose **Add new site → Import an existing project**, connect this repository, and deploy with the default settings. For a manual deploy, drag the project folder into Netlify Drop.
+
+Notes are stored in the current browser's local storage. They stay in that browser on that device and are not synced between devices or users.
+
+### Run as a desktop app
 
 ```
 pip install -r requirements.txt
