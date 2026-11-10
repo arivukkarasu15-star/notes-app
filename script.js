@@ -6,6 +6,7 @@ const selectedIds = new Set();
 const noteList = document.getElementById("noteList");
 const noteCount = document.getElementById("noteCount");
 const noResults = document.getElementById("noResults");
+const emptyListState = document.getElementById("emptyListState");
 const selectBtn = document.getElementById("selectBtn");
 const bulkActions = document.getElementById("bulkActions");
 const selectedCount = document.getElementById("selectedCount");
@@ -46,6 +47,7 @@ function renderNotes() {
     .filter(note => (note.title + " " + note.body).toLowerCase().includes(query));
 
   noteCount.textContent = notes.length;
+  emptyListState.hidden = notes.length > 0 || Boolean(query);
   noResults.hidden = visibleNotes.length > 0 || !query;
   bulkActions.hidden = !selectionMode;
   selectedCount.textContent = `${selectedIds.size} selected`;
@@ -134,6 +136,7 @@ function createNote() {
 
 document.getElementById("newBtn").onclick = createNote;
 document.getElementById("emptyNewBtn").onclick = createNote;
+document.getElementById("emptyListNewBtn").onclick = createNote;
 document.getElementById("backBtn").onclick = closeEditor;
 
 document.getElementById("deleteBtn").onclick = () => {
